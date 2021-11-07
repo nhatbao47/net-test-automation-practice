@@ -22,9 +22,7 @@ namespace TestAutomationPractice.Testcases
 
             // Verify personal information
             var personalInfo = accountPage.GetPersonalInformation();
-            Assert.AreEqual(newAccount.FirstName, personalInfo.FirstName);
-            Assert.AreEqual(newAccount.LastName, personalInfo.LastName);
-            Assert.AreEqual(newAccount.EmailAddress, personalInfo.EmailAddress);
+            AssertModels(newAccount, personalInfo, nameof(newAccount.Password), nameof(newAccount.Address));
             accountPage.ClickBackButton();
 
             // Verify address
@@ -32,13 +30,12 @@ namespace TestAutomationPractice.Testcases
             accountPage.WaitUntilHeadingVisible("My addresses");
             var addressBox = accountPage.GetAddressText();
             var address = newAccount.Address;
-            Assert.IsTrue(addressBox.Contains(address.FirstName), "The primary address' first name is not exists");
-            Assert.IsTrue(addressBox.Contains(address.LastName), "The primary address' last name is not exists");
-            Assert.IsTrue(addressBox.Contains(address.Address), "The primary address is not exists");
-            Assert.IsTrue(addressBox.Contains(address.City), "The primary address' city is not exists");
-            Assert.IsTrue(addressBox.Contains(address.State), "The primary address' state is not exists");
-            Assert.IsTrue(addressBox.Contains(address.ZipCode), "The primary address' zipcode is not exists");
-            Assert.IsTrue(addressBox.Contains(address.MobilePhone), "The primary address' mobile phone is not exists");
+            var propNames = address.GetPropertyNames();
+            foreach (var propName in propNames)
+            {
+                Assert.IsTrue(addressBox.Contains(address.GetPropertyValue(propName).ToString()),
+                    $"Current address: {propName} is not exists");
+            }
         }
     }
 }

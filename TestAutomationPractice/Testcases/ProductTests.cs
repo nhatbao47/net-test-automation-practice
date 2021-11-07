@@ -16,7 +16,7 @@ namespace TestAutomationPractice.Testcases
             homePage.SearchProduct(firstProduct.Name);
             homePage.WaitUntilPageReady();
             var result = homePage.GetFirstProductOnPage();
-            Assert.IsTrue(firstProduct.IsEqual(result), "They are difference");
+            AssertModels(firstProduct, result);
         }
     }
 }

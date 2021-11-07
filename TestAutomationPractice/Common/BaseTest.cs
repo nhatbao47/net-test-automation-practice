@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
-using TestAutomationPractice.Common;
+using System.Linq;
 using TestAutomationPractice.PageObjects;
 
 namespace TestAutomationPractice.Common
@@ -22,6 +22,17 @@ namespace TestAutomationPractice.Common
         public void TearDown()
         {
             webDriver.Quit();
+        }
+
+        public void AssertModels(object source, object target, params string[] ignoreProps)
+        {
+            var propNames = source.GetPropertyNames();
+            foreach (var propName in propNames)
+            {
+                if (ignoreProps == null || ignoreProps.Contains(propName)) continue;
+                Assert.AreEqual(source.GetPropertyValue(propName), target.GetPropertyValue(propName),
+                            $"The '{propName}' is not equals");
+            }
         }
     }
 }

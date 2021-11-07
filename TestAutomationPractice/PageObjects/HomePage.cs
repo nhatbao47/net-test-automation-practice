@@ -31,11 +31,6 @@ namespace TestAutomationPractice.PageObjects
             builder.MoveToElement(link).Perform();
         }
 
-        public void ClickSubMenu(string menu)
-        {
-            ClickElement(GetLinkLocator(menu));
-        }
-
         public ProductModel GetFirstProductOnPage()
         {
             var firstProduct = new ProductModel()

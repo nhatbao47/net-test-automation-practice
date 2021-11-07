@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 
 namespace TestAutomationPractice.Common
 {
@@ -11,5 +12,8 @@ namespace TestAutomationPractice.Common
                 return property.GetValue(classInstance, null);
             return null;
         }
+
+        public static string[] GetPropertyNames<T>(this T classInstance)
+            => classInstance.GetType().GetProperties().Select(s => s.Name).ToArray();
     }
 }

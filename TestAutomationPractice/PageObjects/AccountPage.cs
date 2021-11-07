@@ -41,7 +41,7 @@ namespace TestAutomationPractice.PageObjects
                     State = "Alabama",
                     ZipCode = "36104",
                     MobilePhone = "334-516-7823",
-                    AddressAlias = "47215 Franklin Street"
+                    AddressAlias = "3253 Franklin Street"
                 }
             };
         }
