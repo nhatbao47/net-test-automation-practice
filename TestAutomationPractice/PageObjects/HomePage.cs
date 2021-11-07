@@ -9,10 +9,18 @@ namespace TestAutomationPractice.PageObjects
     {
         public HomePage(IWebDriver driver) : base(driver) { }
 
+        private By _signInLink = By.CssSelector("a.login");
         private By _searchTextBox = By.Id("search_query_top");
         private By _searchButton = By.CssSelector("#searchbox button");
         private By _productName = By.CssSelector(".product_list .product-container:first-child .right-block .product-name");
         private By _productPrice = By.CssSelector(".product_list .product-container:first-child .right-block .product-price");
+
+        public AccountPage ClickSignInButton()
+        {
+            ClickElement(_signInLink);
+            WaitUntilPageReady();
+            return new AccountPage(WebDriver);
+        }
 
         public void HoverLink(string text)
         {
@@ -43,7 +51,5 @@ namespace TestAutomationPractice.PageObjects
             SendKeyToElement(_searchTextBox, productName);
             ClickElement(_searchButton);
         }
-
-        private By GetLinkLocator(string text) => By.CssSelector($"a[title^='{text}']");
     }
 }

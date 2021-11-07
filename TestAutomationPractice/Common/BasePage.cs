@@ -34,16 +34,16 @@ namespace TestAutomationPractice.Common
             element.SendKeys(value);
         }
 
+        public void SelectElement(By locator, string value)
+        {
+            var element = FindElement(locator);
+            element.SendKeys(value);
+        }
+
         public void WaitForElementVisible(By locator)
         {
             var driverWait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(_timeout));
             driverWait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(locator));
-        }
-
-        public void WaitForAlertVisible()
-        {
-            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(_timeout));
-            wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
         }
 
         public void WaitUntilPageReady()
@@ -63,12 +63,20 @@ namespace TestAutomationPractice.Common
             }
         }
 
-        public bool IsAlertShown(string message)
+        public string GetElementValue(By locator)
         {
-            var alertDialog = WebDriver.SwitchTo().Alert();
-            var text = alertDialog.Text;
-            alertDialog.Accept();
-            return Equals(message, text);
+            try
+            {
+                return FindElement(locator).GetAttribute("value");
+            }
+            catch (NoSuchElementException)
+            {
+                return string.Empty;
+            }
         }
+
+        public By GetLinkLocator(string text) => By.CssSelector($"a[title='{text}']");
+
+        public void ClickLink(string text) => ClickElement(GetLinkLocator(text));
     }
 }

@@ -3,7 +3,7 @@ using OpenQA.Selenium;
 using TestAutomationPractice.Common;
 using TestAutomationPractice.PageObjects;
 
-namespace TestAutomationPractice.TestCases
+namespace TestAutomationPractice.Common
 {
     public class BaseTest
     {

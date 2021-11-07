@@ -6,6 +6,13 @@
         Chrome,
         Edge
     }
+
+    public enum ActionType
+    {
+        SendKey,
+        Select
+    }
+
     class Enums
     {
     }

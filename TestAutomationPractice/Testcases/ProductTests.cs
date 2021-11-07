@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using TestAutomationPractice.TestCases;
+using TestAutomationPractice.Common;
 
 namespace TestAutomationPractice.Testcases
 {
@@ -10,7 +10,7 @@ namespace TestAutomationPractice.Testcases
         public void SearchProduct()
         {
             homePage.HoverLink("Women");
-            homePage.ClickSubMenu("T-shirts");
+            homePage.ClickLink("T-shirts");
             homePage.WaitUntilPageReady();
             var firstProduct = homePage.GetFirstProductOnPage();
             homePage.SearchProduct(firstProduct.Name);
